@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="google-site-verification" content="ilalb0jZKO_byQAVbT-l4p7ivwqYNEbHAdryZd5jfP0" />
+    <title>Giffer - Show</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .media {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: #000 no-repeat center center;
+        background-size: contain;
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+    <!-- site-canvas -->
+    <div class="site-canvas">
+      <div id="the-image" class="media"></div>
+    </div>
+    <!--/ site-canvas -->
+    <script>
+      var imgTime = 8000;
+
+      var theImage = document.querySelector('#the-image');
+      var lastImg = null;
+      setInterval(function () {
+        var uuid = lastImg ? lastImg.uuid : 'no';
+        fetch('https://giffer-lusitano.herokuapp.com/gif/' + uuid)
+          .then(function(response) {
+            return response.json()
+          }).then(function(json) {
+            console.log('json', json);
+            lastImg = json;
+            theImage.style.backgroundImage = "url(" + json.url + ")";
+          }).catch(function(ex) {
+            console.log('parsing failed', ex)
+          })
+      }, imgTime);
+    </script>
+  </body>
+</html>

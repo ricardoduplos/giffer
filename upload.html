@@ -1,0 +1,48 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="google-site-verification" content="ilalb0jZKO_byQAVbT-l4p7ivwqYNEbHAdryZd5jfP0" />
+    <title>Giffer - Uploader</title>
+
+    
+  </head>
+
+  <body>
+
+    <!-- site-canvas -->
+    <div class="site-canvas">
+      <form>
+        pwd:
+        <input type="password" name="pwd" id="input-pwd"/> <br />
+        <input type="text" name="url" id="input-url"/>
+        <button type="submit" id="bttn-sub">upload</button>
+      </form>
+    </div>
+    <!--/ site-canvas -->
+    <script>
+      document.querySelector('#bttn-sub').addEventListener('click', function (e) {
+        e.preventDefault();
+        var url = document.querySelector('#input-url').value;
+        var pwd = document.querySelector('#input-pwd').value;
+
+        if (!url) return;
+
+        fetch('https://giffer-lusitano.herokuapp.com/gif?token=' + pwd, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            url: url
+          })
+        }).then(function () {
+          document.querySelector('#input-url').value = '';
+        })
+
+      });
+    </script>
+  </body>
+</html>

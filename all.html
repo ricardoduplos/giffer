@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="google-site-verification" content="ilalb0jZKO_byQAVbT-l4p7ivwqYNEbHAdryZd5jfP0" />
+    <title>Giffer - manage</title>
+
+    
+  </head>
+
+  <body>
+
+    <input type="password" name="pwd" id="input-pwd"/>
+    <!-- site-canvas -->
+    <div class="site-canvas">
+    </div>
+    <!--/ site-canvas -->
+    <script>
+      var container = document.querySelector('.site-canvas');
+
+      function render () {
+        container.innerHTML = '';
+        fetch('https://giffer-lusitano.herokuapp.com/gifs?t=' + Date.now())
+          .then(function(response) {
+            return response.json()
+          }).then(function(json) {
+            json.forEach(function (o) {
+              var wrapper = document.createElement('div');
+              var img = document.createElement('img');
+              img.setAttribute('src', o.url);
+
+              var link = document.createElement('a');
+              link.onclick = function (e) {
+                e.preventDefault();
+                var pwd = document.querySelector('#input-pwd').value;
+
+                fetch('http://localhost:3000/gif/' + o.uuid + '?token=' + pwd, {
+                  method: 'DELETE'
+                }).then(function () {
+                  render ()
+                })
+
+              };
+              link.setAttribute('href', '#');
+              link.innerHTML = 'delete';
+
+              wrapper.appendChild(img);
+              wrapper.appendChild(link);
+              container.appendChild(wrapper);
+            });
+          })
+      }
+
+      render();
+
+    </script>
+  </body>
+</html>
