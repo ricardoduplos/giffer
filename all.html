@@ -35,7 +35,7 @@
                 e.preventDefault();
                 var pwd = document.querySelector('#input-pwd').value;
 
-                fetch('http://localhost:3000/gif/' + o.uuid + '?token=' + pwd, {
+                fetch('https://giffer-lusitano.herokuapp.com/gif/' + o.uuid + '?token=' + pwd, {
                   method: 'DELETE'
                 }).then(function () {
                   render ()
