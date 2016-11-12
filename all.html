@@ -6,7 +6,44 @@
     <meta name="google-site-verification" content="ilalb0jZKO_byQAVbT-l4p7ivwqYNEbHAdryZd5jfP0" />
     <title>Giffer - manage</title>
 
-    
+    <style>
+    .site-canvas > div {
+      float: left;
+      width: 10%;
+    }
+
+    .site-canvas > div > div {
+      padding-bottom: 100%;
+      height: 0;
+      overflow: hidden;
+      position: relative;
+      box-sizing: border-box;
+      border: 1px solid #fff;
+      background: #333;
+    }
+
+    .site-canvas > div > div img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+    }
+
+    .site-canvas > div > div a {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: red;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 10px;
+      padding: 4px 8px;
+      text-decoration: none;
+      font-family: Arial;
+    }
+    </style>
   </head>
 
   <body>
@@ -28,6 +65,7 @@
             console.log(json.length);
             json.forEach(function (o) {
               var wrapper = document.createElement('div');
+              var wrapperInner = document.createElement('div');
               var img = document.createElement('img');
               img.setAttribute('src', o.url);
 
@@ -46,8 +84,9 @@
               link.setAttribute('href', '#');
               link.innerHTML = 'delete';
 
-              wrapper.appendChild(img);
-              wrapper.appendChild(link);
+              wrapperInner.appendChild(img);
+              wrapperInner.appendChild(link);
+              wrapper.appendChild(wrapperInner);
               container.appendChild(wrapper);
             });
           })
