@@ -25,6 +25,7 @@
           .then(function(response) {
             return response.json()
           }).then(function(json) {
+            console.log(json.length);
             json.forEach(function (o) {
               var wrapper = document.createElement('div');
               var img = document.createElement('img');
@@ -35,7 +36,7 @@
                 e.preventDefault();
                 var pwd = document.querySelector('#input-pwd').value;
 
-                fetch('http://localhost:3000/gif/' + o.uuid + '?token=' + pwd, {
+                fetch('https://giffer-lusitano.herokuapp.com/gif/' + o.uuid + '?token=' + pwd, {
                   method: 'DELETE'
                 }).then(function () {
                   render ()
