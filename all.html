@@ -25,6 +25,7 @@
           .then(function(response) {
             return response.json()
           }).then(function(json) {
+            console.log(json.length);
             json.forEach(function (o) {
               var wrapper = document.createElement('div');
               var img = document.createElement('img');
