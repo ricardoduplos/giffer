@@ -50,7 +50,7 @@
 
       setInterval(function () {
         var uuid = lastImg ? lastImg.uuid : 'no';
-        fetch('https://giffer-lusitano.herokuapp.com/gif/' + uuid)
+        fetch('https://giffer-projector.herokuapp.com/gif/' + uuid)
           .then(function(response) {
             return response.json()
           }).then(function(json) {
@@ -60,7 +60,7 @@
 
             var nextImg = lastImg.uuid;
 
-            fetch('https://giffer-lusitano.herokuapp.com/gif/' + nextImg)
+            fetch('https://giffer-projector.herokuapp.com/gif/' + nextImg)
               .then(function(response) {
                 return response.json()
               }).then(function(json) {
